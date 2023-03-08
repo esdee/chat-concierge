@@ -13,7 +13,7 @@ async function pingSupabase(): Promise<boolean> {
   }
 }
 
-async function pingOpenAI(): Promise<boolean> {
+async function pingOpenAI(): Promise<number[]> {
   try {
     const openAIClient = createOpenAIClient();
     const openAIResponse = await openAIClient.createEmbedding({
@@ -21,21 +21,21 @@ async function pingOpenAI(): Promise<boolean> {
       input: 'hello world',
     });
     const [{ embedding }] = openAIResponse.data.data;
-    return embedding.length === 1536;
+    return embedding;
   } catch (e) {
     console.log(e);
-    return false;
+    return [];
   }
 }
 
 export const onGet: RequestHandler = async ({ json }) => {
   const okOne = await pingSupabase();
-  const okTwo = await pingOpenAI();
+  const embeddings = await pingOpenAI();
 
   json(200, {
     message: 'Hello World !!',
     random: Math.random() * 100,
     supabaseOk: okOne,
-    openAIOK: okTwo,
+    openAIOK: embeddings,
   });
 };
