@@ -13,17 +13,9 @@ export async function pingOpenAI(): Promise<boolean> {
       method: 'GET',
       headers,
     });
-    const body = await response.json();
-    console.info(
-      'OPEN AI PING RESPONSE ---\n',
-      response,
-      '\n-- BODY --\n',
-      body,
-      '\n---\n'
-    );
     return response.status === 200;
   } catch (e) {
-    console.error(e);
+    console.error('OpenAI ping error --\n', e, '\n---\n');
   }
   return false;
 }
