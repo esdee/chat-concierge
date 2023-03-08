@@ -1,8 +1,9 @@
 function apiHeaders() {
-  const headers = new Headers();
-  headers.append('Content-Type', 'application/json');
-  headers.append('Authorization', `Bearer ${import.meta.env.VITE_OPENAI_KEY}`);
-  return headers;
+  return {
+    Authorization: `Bearer ${import.meta.env.VITE_OPENAI_KEY}`,
+    'OpenAI-Organization': import.meta.env.VITE_OPENAI_ORGANIZATION,
+    'Content-Type': 'application/json',
+  };
 }
 
 export async function pingOpenAI(): Promise<boolean> {
@@ -12,7 +13,14 @@ export async function pingOpenAI(): Promise<boolean> {
       method: 'GET',
       headers,
     });
-    console.info('OPEN AI PING RESPONSE ---\n', response, '\n---\n');
+    const body = await response.json();
+    console.info(
+      'OPEN AI PING RESPONSE ---\n',
+      response,
+      '\n-- BODY --\n',
+      body,
+      '\n---\n'
+    );
     return response.status === 200;
   } catch (e) {
     console.error(e);
