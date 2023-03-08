@@ -1,13 +1,15 @@
 import type { RequestHandler } from '@builder.io/qwik-city';
-import { openAI } from '../../../openAI-client';
-import { supabase } from '../../../supabase-client';
+import { createOpenAIClient } from '../../../openAI-client';
+import { createSupabaseClient } from '../../../supabase-client';
 
 async function pingSupabase() {
+  const supabase = createSupabaseClient();
   return await supabase.from('searchables').select('*').limit(1);
 }
 
 async function pingOpenAI() {
-  const openAIResponse = await openAI.createEmbedding({
+  const openAIClient = createOpenAIClient();
+  const openAIResponse = await openAIClient.createEmbedding({
     model: 'text-embedding-ada-002',
     input: 'hello world',
   });
