@@ -40,5 +40,10 @@
     "vite": "4.1.4",
     "vite-tsconfig-paths": "3.5.0",
     "wrangler": "latest"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.10.0",
+    "openai": "^3.2.1",
+    "supabase": "^1.42.4"
   }
 }
