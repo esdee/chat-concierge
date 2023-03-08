@@ -7,7 +7,8 @@ async function pingSupabase(): Promise<boolean> {
     const supabase = createSupabaseClient();
     await supabase.from('searchables').select('*').limit(1);
     return true;
-  } catch (_e) {
+  } catch (e) {
+    console.log(e);
     return false;
   }
 }
@@ -21,7 +22,8 @@ async function pingOpenAI(): Promise<boolean> {
     });
     const [{ embedding }] = openAIResponse.data.data;
     return embedding.length === 1536;
-  } catch (_e) {
+  } catch (e) {
+    console.log(e);
     return false;
   }
 }
