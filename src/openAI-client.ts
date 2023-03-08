@@ -12,6 +12,7 @@ export async function pingOpenAI(): Promise<boolean> {
       method: 'GET',
       headers,
     });
+    console.info('OPEN AI PING RESPONSE ---\n', response, '\n---\n');
     return response.status === 200;
   } catch (e) {
     console.error(e);
