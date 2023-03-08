@@ -61,7 +61,10 @@ export default component$(() => {
               <code>npm run qwik add azure-swa</code>
             </td>
             <td>
-              <a href="https://learn.microsoft.com/azure/static-web-apps/overview" target="_blank">
+              <a
+                href="https://learn.microsoft.com/azure/static-web-apps/overview"
+                target="_blank"
+              >
                 Azure Static Web Apps
               </a>
             </td>
@@ -101,7 +104,10 @@ export default component$(() => {
               <code>npm run qwik add vercel-edge</code>
             </td>
             <td>
-              <a href="https://vercel.com/docs/concepts/get-started" target="_blank">
+              <a
+                href="https://vercel.com/docs/concepts/get-started"
+                target="_blank"
+              >
                 Vercel Edge Functions
               </a>
             </td>
@@ -138,11 +144,8 @@ export default component$(() => {
           </a>
         </li>
       </ul>
-      <Link class="mindblow" href="/flower/">
-        Blow my mind 🤯
-      </Link>
-      <Link class="todolist" href="/todolist/">
-        TODO demo 📝
+      <Link class="ping" href="api/ping/">
+        Ping API
       </Link>
     </div>
   );

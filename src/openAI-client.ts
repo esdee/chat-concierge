@@ -1,9 +1,20 @@
-import { Configuration, OpenAIApi } from 'openai';
+function apiHeaders() {
+  const headers = new Headers();
+  headers.append('Content-Type', 'application/json');
+  headers.append('Authorization', `Bearer ${import.meta.env.VITE_OPENAI_KEY}`);
+  return headers;
+}
 
-const configuration = new Configuration({
-  apiKey: import.meta.env.VITE_OPENAI_KEY,
-});
-
-export function createOpenAIClient(): OpenAIApi {
-  return new OpenAIApi(configuration);
+export async function pingOpenAI(): Promise<boolean> {
+  const headers = apiHeaders();
+  try {
+    const response = await fetch('https://api.openai.com/v1/models', {
+      method: 'GET',
+      headers,
+    });
+    return response.status === 200;
+  } catch (e) {
+    console.error(e);
+  }
+  return false;
 }
